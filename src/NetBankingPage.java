@@ -9,26 +9,27 @@
  */
 public class NetBankingPage extends javax.swing.JFrame {
 
-    
-private String str;
+    private String str;
+
     /**
      * Creates new form NetBankingPage
+     *
      * @param username
      */
     public NetBankingPage() {
         initComponents();
     }
+
     public NetBankingPage(String username) {
         initComponents();
-        str=username;
-        
+        str = username;
+
     }
-    public String getUserName()
-    {
+
+    public String getUserName() {
         return this.str;
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,12 +106,11 @@ private String str;
     }// </editor-fold>//GEN-END:initComponents
 
     private void depositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositActionPerformed
-       String username=this.getUserName();      
-       System.out.println("NetBankingPage : Deposit button pressed for username "+username);
-       new Deposit(username).setVisible(true); 
-        
+        String username = this.getUserName();
+        System.out.println("NetBankingPage : Deposit button pressed for username " + username);
+        new Deposit(username).setVisible(true);
 
-      // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_depositActionPerformed
 
     private void transferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferActionPerformed
@@ -118,10 +118,10 @@ private String str;
     }//GEN-LAST:event_transferActionPerformed
 
     private void balanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_balanceActionPerformed
-       String username=this.getUserName();      
-       System.out.println("NetBankingPage : Check balance button pressed for username "+username);
-       new Balance(username).setVisible(true);
- 
+        String username = this.getUserName();
+        System.out.println("NetBankingPage : Check balance button pressed for username " + username);
+        new Balance(username).setVisible(true);
+
 // TODO add your handling code here:
     }//GEN-LAST:event_balanceActionPerformed
 
@@ -154,7 +154,7 @@ private String str;
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            
+
             new NetBankingPage().setVisible(true);
         });
     }

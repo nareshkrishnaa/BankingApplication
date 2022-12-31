@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author Admin
@@ -24,21 +23,19 @@ public class Deposit extends javax.swing.JFrame {
      */
     public Deposit() {
         initComponents();
-        str="ank@123";
+        str = "ank@123";
     }
     private String str;
+
     public Deposit(String username) {
         initComponents();
-        str=username;
+        str = username;
     }
-    public String getUserName(){
-        
+
+    public String getUserName() {
+
         return this.str;
     }
-    
-  
-        
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -96,46 +93,42 @@ public class Deposit extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
-          String username=this.getUserName();
-          int amt=Integer.parseInt(amount.getText());
+        String username = this.getUserName();
+        int amt = Integer.parseInt(amount.getText());
         try {
             Class.forName("com.mysql.jdbc.Driver");
             //here sonoo is database name, root is username and password
             try (Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/bankingApplication", "root", "password")) {
+                    "jdbc:mysql://localhost:3306/bankingApplication", "root", "password")) {
                 //here sonoo is database name, root is username and password
                 Statement stmt = con.createStatement();
-                
-                ResultSet rs = stmt.executeQuery("select * from customerdetails where emailId="+"'"+username+"'");
-                
-                
-                
-                while(rs.next()){
-                if(rs.getString(4).equals(username)){
-                    //int initialBalance=rs.getInt("BankBalance");
-                    //this.updateQuery(finalBalance,username);
-                    
-                    String updateQuery="update customerdetails set BankBalance="+(rs.getInt("BankBalance")+amt)+
-                            " where emailId='"+username+"';";
-                    System.out.println(updateQuery);
-                    stmt.executeUpdate(updateQuery);
-                    System.out.println("before option pane");
-                    JOptionPane.showMessageDialog(null, "The account balance is deposited");
-                    
-                    System.out.println("after option pane");
-                    break;
-                    
-                }
-                
-                else{
-                    JOptionPane.showMessageDialog(null, "The account number and password does not match");
-                }
+
+                ResultSet rs = stmt.executeQuery("select * from customerdetails where emailId=" + "'" + username + "'");
+
+                while (rs.next()) {
+                    if (rs.getString(4).equals(username)) {
+                        //int initialBalance=rs.getInt("BankBalance");
+                        //this.updateQuery(finalBalance,username);
+
+                        String updateQuery = "update customerdetails set BankBalance=" + (rs.getInt("BankBalance") + amt)
+                                + " where emailId='" + username + "';";
+                        System.out.println(updateQuery);
+                        stmt.executeUpdate(updateQuery);
+                        System.out.println("before option pane");
+                        JOptionPane.showMessageDialog(null, "The account balance is deposited");
+
+                        System.out.println("after option pane");
+                        break;
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "The account number and password does not match");
+                    }
                 }
             }
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
-     
+
         // TODO add your handling code here:
     }//GEN-LAST:event_submitActionPerformed
 

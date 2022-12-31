@@ -13,18 +13,21 @@ public class WelcomeLoginPage extends javax.swing.JFrame {
      * Creates new form WelcomeLoginPage
      */
     private String str;
+
     public WelcomeLoginPage() {
         initComponents();
     }
+
     public WelcomeLoginPage(String username) {
-        str=username;
+        str = username;
         initComponents();
     }
-    public String getUserName(){
+
+    public String getUserName() {
         return this.str;
-    } 
-    public void setWelcomeText(String str)
-    {
+    }
+
+    public void setWelcomeText(String str) {
         welcomeText.setText(str);
     }
 
@@ -86,8 +89,8 @@ public class WelcomeLoginPage extends javax.swing.JFrame {
 
     private void continueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueButtonActionPerformed
         // TODO add your handling code here:
-        System.out.println("Welcome page: continue button pressed for username "+this.getUserName());
-       new NetBankingPage(this.getUserName()).setVisible(true);
+        System.out.println("Welcome page: continue button pressed for username " + this.getUserName());
+        new NetBankingPage(this.getUserName()).setVisible(true);
     }//GEN-LAST:event_continueButtonActionPerformed
 
     /**

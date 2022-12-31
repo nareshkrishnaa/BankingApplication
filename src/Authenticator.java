@@ -4,6 +4,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -11,7 +13,6 @@ import javax.swing.JOptionPane;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author Admin
@@ -23,9 +24,8 @@ public class Authenticator extends javax.swing.JFrame {
      */
     public Authenticator() {
         initComponents();
-       
+
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -154,65 +154,54 @@ public class Authenticator extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButton
-        
-        System.out.println("Authenticator page: Login button pressed for user "+userName.getText());
-        
+
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            //here sonoo is database name, root is username and password
-            try (Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/bankingapplication", "root", "password")) {
-                //here sonoo is database name, root is username and password
-                Statement stmt = con.createStatement();
-                var username=userName.getText();
-                var password=pwd.getText();
-                String name="";
-                ResultSet rs = stmt.executeQuery("select * from customerDetails where emailId='"+username+"'");
-                
-                int count=0;
-                int flag=0;
-                while (rs.next()){
-                    count++;
-                    //System.out.println(rs.getString(1) + "  " + rs.getString(2));
-                    if(rs.getString(4).equals(username) && rs.getString(6).equals(password))
-                    {
-                        System.out.println("User name exists, proceed to welcome page");
-                        name=rs.getString(1);
-                        flag=1;
-                        break;
-                    }
-                    
+            System.out.println("Authenticator page: Login button pressed for user " + userName.getText());
+            
+            
+            
+            ConnectionHelper ch =new ConnectionHelper();
+            
+            Statement stmt = ch.getNewStatement();
+            var username = userName.getText();
+            var password = pwd.getText();
+            String name = "";
+            ResultSet rs = stmt.executeQuery("select * from customerDetails where emailId='" + username + "'");
+            
+            int count = 0;
+            int flag = 0;
+            while (rs.next()) {
+                count++;
+                //System.out.println(rs.getString(1) + "  " + rs.getString(2));
+                if (rs.getString(4).equals(username) && rs.getString(6).equals(password)) {
+                    System.out.println("User name exists, proceed to welcome page");
+                    name = rs.getString(1);
+                    flag = 1;
+                    break;
                 }
-                
-                if(flag==1){
-                    
-                    WelcomeLoginPage wlp =new WelcomeLoginPage(username);
-                    wlp.setWelcomeText("Welcome   "+name);
-                    wlp.setVisible(true);
-                    
-                    
-                    //
-                    //
-               }
-                else{
-                    JOptionPane.showMessageDialog(null, "User name and Password do not match\nor does not Exist");
-                }
-                  
                 
             }
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println(e);
+            
+            if (flag == 1) {
+                
+                WelcomeLoginPage wlp = new WelcomeLoginPage(username);
+                wlp.setWelcomeText("Welcome   " + name);
+                wlp.setVisible(true);
+                
+                //
+                //
+            } else {
+                JOptionPane.showMessageDialog(null, "User name and Password do not match\nor does not Exist");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Authenticator.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
-{
-  
-}
-// TODO add your handling code here:
+        
     }//GEN-LAST:event_LoginButton
 
     private void ExitButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButton
-      this.dispose();
+        this.dispose();
 // TODO add your handling code here:
     }//GEN-LAST:event_ExitButton
 
@@ -250,8 +239,8 @@ public class Authenticator extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               Authenticator authenticator= new Authenticator();
-                        authenticator.setVisible(true);
+                Authenticator authenticator = new Authenticator();
+                authenticator.setVisible(true);
             }
         });
     }

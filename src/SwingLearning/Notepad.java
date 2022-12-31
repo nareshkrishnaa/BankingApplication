@@ -8,10 +8,12 @@
  * @author Admin
  */
 import java.sql.*;
+
 public class Notepad {
+
     public static void main(String args[]) {
-        
-        System.out.println(5+5);
+
+        System.out.println(5 + 5);
         try {
             Class.forName("com.mysql.jdbc.Driver");
             //here sonoo is database name, root is username and password
@@ -20,17 +22,16 @@ public class Notepad {
                 //here sonoo is database name, root is username and password
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery("select * from Login");
-                var username="zayn";
-                String password="1234";
-                int count=0;
-                while (rs.next()){
+                var username = "zayn";
+                String password = "1234";
+                int count = 0;
+                while (rs.next()) {
                     count++;
                     System.out.println(rs.getString(1) + "  " + rs.getString(2));
-                    if(rs.getString(1).equals(username) && rs.getString(2).equals(password))
-                    {
-                        System.out.println("User name exists at "+count+"th position proceed to next page");
+                    if (rs.getString(1).equals(username) && rs.getString(2).equals(password)) {
+                        System.out.println("User name exists at " + count + "th position proceed to next page");
                     }
-                    
+
                 }
             }
         } catch (ClassNotFoundException | SQLException e) {

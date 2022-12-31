@@ -108,7 +108,6 @@ public class Transfer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void sendMoneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMoneyActionPerformed
-              
 
 // TODO add your handling code here:
     }//GEN-LAST:event_sendMoneyActionPerformed

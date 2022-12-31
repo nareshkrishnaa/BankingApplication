@@ -9,7 +9,9 @@ package SwingLearning;
  * @author Admin
  */
 import javax.swing.*;
+
 public class ImageInButton {
+
     public static void main(String[] args) {
         JFrame f = new JFrame("Button Example");
         JButton b = new JButton(new ImageIcon("C:\\Users\\Admin\\OneDrive\\Desktop\\JAVA PROJECT\\images\\button_icon.png"));

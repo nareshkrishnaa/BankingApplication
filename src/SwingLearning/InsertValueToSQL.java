@@ -1,4 +1,5 @@
 // Java Program to create a simple JTextArea
+
 import java.awt.event.*;
 import java.awt.*;
 import java.sql.Connection;
@@ -7,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.*;
+
 class InsertValueToSQL extends JFrame implements ActionListener {
 
     // JFrame
@@ -22,14 +24,13 @@ class InsertValueToSQL extends JFrame implements ActionListener {
     static JTextArea jt;
 
     // default constructor
-    InsertValueToSQL() {}
+    InsertValueToSQL() {
+    }
 
     // main class
     public static void main(String[] args) {
         // create a new frame to store text field and button
         f = new JFrame("textfield");
-
-       
 
         // create a new button
         b = new JButton("submit");
@@ -66,17 +67,16 @@ class InsertValueToSQL extends JFrame implements ActionListener {
             String str = jt.getText();
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                
+
                 try (Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/test1", "root", "password")) {
-                    
-                     Statement stmt=(Statement)con.createStatement();
+                        "jdbc:mysql://localhost:3306/test1", "root", "password")) {
 
-         String name=str;
-        
+                    Statement stmt = (Statement) con.createStatement();
 
-       String insert="INSERT INTO table2 VALUES('"+name+"')";
-       stmt.executeUpdate(insert);
+                    String name = str;
+
+                    String insert = "INSERT INTO table2 VALUES('" + name + "')";
+                    stmt.executeUpdate(insert);
                 }
             } catch (ClassNotFoundException | SQLException e1) {
                 System.out.println(e1);

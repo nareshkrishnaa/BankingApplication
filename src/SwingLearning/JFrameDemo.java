@@ -8,15 +8,17 @@
  * @author Admin
  */
 import javax.swing.*;
+
 public class JFrameDemo {
-    public static void main(String args[]){
-        JFrame f= new JFrame();
-        JButton b=new JButton("click");
-        b.setBounds(135,80,100,50);
+
+    public static void main(String args[]) {
+        JFrame f = new JFrame();
+        JButton b = new JButton("click");
+        b.setBounds(135, 80, 100, 50);
         f.add(b);
-        f.setSize(400,500);
+        f.setSize(400, 500);
         f.setLayout(null);
         f.setVisible(true);
     }
-    
+
 }

@@ -15,7 +15,6 @@ public class OpeningPage extends javax.swing.JFrame {
     public OpeningPage() {
         initComponents();
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -87,11 +86,10 @@ public class OpeningPage extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         System.out.println("Opening page: login option selected");
-        Authenticator auth= new Authenticator();
+        Authenticator auth = new Authenticator();
         auth.setVisible(true);
-        
-       
- // TODO add your handling code here:
+
+        // TODO add your handling code here:
     }//GEN-LAST:event_loginButtonActionPerformed
 
     /**

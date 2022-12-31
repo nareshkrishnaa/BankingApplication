@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author Admin
@@ -253,11 +252,11 @@ public class AccountCreation extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    int count=0;
-    String gender="";
+    int count = 0;
+    String gender = "";
     private void genderNonCisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderNonCisActionPerformed
-       gender="Non Cis Gender"; // TODO add your handling code here:
-       
+        gender = "Non Cis Gender"; // TODO add your handling code here:
+
     }//GEN-LAST:event_genderNonCisActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -265,60 +264,51 @@ public class AccountCreation extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void genderFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderFemaleActionPerformed
-       gender="Female" ;// TODO add your handling code here:
-       
+        gender = "Female";// TODO add your handling code here:
+
     }//GEN-LAST:event_genderFemaleActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-       
-       String name1=name.getText();
-       String phoneNumber1=phoneNumber.getText();
-       String mailId1=mailId.getText();
-       String ssn1=ssn.getText();
-       String password1=password.getText();
-       String confirmPassword1=confirmPassword.getText();
-       System.out.println("name : "+name.getText()); 
-       System.out.println("phoneNumber : "+phoneNumber.getText());
-       System.out.println("gender : "+gender);
-       System.out.println("mail id :"+mailId.getText());
-       System.out.println("SSN :"+ssn.getText());
-       
-       if("".equals(name1)||"".equals(phoneNumber1)||"".equals(mailId1)||"".equals(ssn1)){
-           
-       System.out.println("All mandatory fields are not entered");
-       JOptionPane.showMessageDialog(null, "Please enter details in all\nmandatory fields");
-       }
-       else
-       {
-           if(password1.equals(confirmPassword1)){
-               
-              try {
-            Class.forName("com.mysql.jdbc.Driver");
-            //here sonoo is database name, root is username and password
-            try (Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/bankingApplication", "root", "password")) {
-                //here sonoo is database name, root is username and password
-                Statement stmt = con.createStatement();
-                 String insert="INSERT INTO customerDetails (name,phoneNumber,gender,emailId,SSN,password) VALUES('"+name1+
-                         "','"+phoneNumber1+"','"+gender+"','"+mailId1+"','"+ssn1+"','"+password1+"')";
-                 stmt.executeUpdate(insert);
+
+        String name1 = name.getText();
+        String phoneNumber1 = phoneNumber.getText();
+        String mailId1 = mailId.getText();
+        String ssn1 = ssn.getText();
+        String password1 = password.getText();
+        String confirmPassword1 = confirmPassword.getText();
+        System.out.println("name : " + name.getText());
+        System.out.println("phoneNumber : " + phoneNumber.getText());
+        System.out.println("gender : " + gender);
+        System.out.println("mail id :" + mailId.getText());
+        System.out.println("SSN :" + ssn.getText());
+
+        if ("".equals(name1) || "".equals(phoneNumber1) || "".equals(mailId1) || "".equals(ssn1)) {
+
+            System.out.println("All mandatory fields are not entered");
+            JOptionPane.showMessageDialog(null, "Please enter details in all\nmandatory fields");
+        } else {
+            if (password1.equals(confirmPassword1)) {
+
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    //here sonoo is database name, root is username and password
+                    try (Connection con = DriverManager.getConnection(
+                            "jdbc:mysql://localhost:3306/bankingApplication", "root", "password")) {
+                        //here sonoo is database name, root is username and password
+                        Statement stmt = con.createStatement();
+                        String insert = "INSERT INTO customerDetails (name,phoneNumber,gender,emailId,SSN,password) VALUES('" + name1
+                                + "','" + phoneNumber1 + "','" + gender + "','" + mailId1 + "','" + ssn1 + "','" + password1 + "')";
+                        stmt.executeUpdate(insert);
+                    }
+                } catch (ClassNotFoundException | SQLException e) {
+                    System.out.println(e);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "The passwords dont match");
             }
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println(e);
-        } 
-               
-           }
-           
-           else{
-               JOptionPane.showMessageDialog(null, "The passwords dont match");
-           }
-               
-           
-       
-    }
 
-
-
+        }
 
 // TODO add your handling code here:
     }//GEN-LAST:event_submitButtonActionPerformed
@@ -328,7 +318,7 @@ public class AccountCreation extends javax.swing.JFrame {
     }//GEN-LAST:event_nameActionPerformed
 
     private void genderMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderMaleActionPerformed
-        gender="male";// TODO add your handling code here:
+        gender = "male";// TODO add your handling code here:
     }//GEN-LAST:event_genderMaleActionPerformed
 
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed

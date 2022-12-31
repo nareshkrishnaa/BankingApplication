@@ -1,8 +1,12 @@
+
 import javax.swing.*;
 import java.awt.event.*;
+
 class RadioButtonDemo extends JFrame implements ActionListener {
+
     JRadioButton rb1, rb2;
     JButton b;
+
     RadioButtonDemo() {
         rb1 = new JRadioButton("Male");
         rb1.setBounds(100, 50, 100, 30);
@@ -21,6 +25,7 @@ class RadioButtonDemo extends JFrame implements ActionListener {
         setLayout(null);
         setVisible(true);
     }
+
     public void actionPerformed(ActionEvent e) {
         if (rb1.isSelected()) {
             System.out.println("Male");
@@ -28,9 +33,10 @@ class RadioButtonDemo extends JFrame implements ActionListener {
         }
         if (rb2.isSelected()) {
             JOptionPane.showMessageDialog(this, "You are Female.");
-            System.out.println("Female ");       
+            System.out.println("Female ");
         }
     }
+
     public static void main(String args[]) {
         new RadioButtonDemo();
     }
