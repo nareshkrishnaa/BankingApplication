@@ -21,9 +21,12 @@ public class RoughClass {
         ConnectionHelper ch =new ConnectionHelper();
             Connection con =ch.getConnection();
             Statement stmt = con.createStatement();
+             Statement stmt1 = con.createStatement();
+            String query="select bankbalance from customerdetails where emailId='ank@123' and password='1234';";
+            String query1="insert into customerdetails values('sara','7896','Female','sara@123','3214','123',45000,'3333')";
+            System.out.println(query1);
+            stmt1.executeUpdate(query1);
             
-            String query="select bankbalance from customerdetails where emailId='ank@123' and password='234';";
-            System.out.println(query);
            ResultSet result= stmt.executeQuery(query);
            if(result.next())
            System.out.println(result.getString("BankBalance"));

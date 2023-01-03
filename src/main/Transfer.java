@@ -4,6 +4,7 @@ package main;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -129,21 +130,59 @@ public class Transfer extends javax.swing.JFrame {
 
     private void sendMoneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMoneyActionPerformed
           String sender=this.getUserName();
+          System.out.println(String.format("sender username is %s",sender));
           String benAcc=benAccNo.getText();
           int amount= Integer.valueOf(amt.getText());
-        try{
+          send: try{
             System.out.println("Submit button pressed in Transfer Form");
             
             ConnectionHelper ch =new ConnectionHelper();
             Connection con =ch.getConnection();
             Statement stmt = con.createStatement();
-            Statement stmt1=con.createStatement();
+            Statement pwdCheck =con.createStatement();
+            Statement accNoCheck =con.createStatement();
+            Statement balanceCheck=con.createStatement();
+            String accNoCheckQuery=String.format("select * from customerdetails where accNo='%s'",benAcc);
+            ResultSet rs1 = accNoCheck.executeQuery(accNoCheckQuery);
+            int benAccFlag=0;
+            if(rs1.next()){
+                System.out.println("ben acc no resultset exists");
+                benAccFlag=1;
+            }
+            if(benAccFlag==0){
+                System.out.println("ben acc does not exist");
+                break send;
+            }
             
-            
-            
+            String balanceCheckQuery=String.format("select BankBalance from customerdetails where emailId='%s'",sender);
+            ResultSet rs2=balanceCheck.executeQuery(balanceCheckQuery);
+            int balFlag=0;
+            if(rs2.next()){
+                if(rs2.getInt("BankBalance")<amount)
+                {
+                    System.out.println("Insufficient balance");
+                    break send;
+                }
+            }
+            String pwdCheckQuery=String.format("select password from customerdetails where emailId='%s'",sender);
+            ResultSet rs=pwdCheck.executeQuery(pwdCheckQuery);
+             
+            if(rs.next())
+                 System.out.println(rs.getString("password")+" "+pwd.getText());
+            if((rs.getString("password")).equals(pwd.getText())){
+                System.out.println("Password is correct");                
             String query=String.format("update customerdetails set BankBalance=BankBalance+%s where accNo='%s'",amount,benAcc);
             System.out.println(query);
             stmt.executeUpdate(query);
+            }
+            else{
+                System.out.println("Password incorrect");
+                break send;
+            }
+              //System.out.println();
+            
+            
+            
             
         }catch(SQLException ex){
             Logger.getLogger(Authenticator.class.getName()).log(Level.SEVERE, null, ex);
