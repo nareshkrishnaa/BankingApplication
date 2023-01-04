@@ -39,6 +39,11 @@ public class OpeningPage extends javax.swing.JFrame {
 
         createAccountButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         createAccountButton.setText("CREATE ACCOUNT");
+        createAccountButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createAccountButtonActionPerformed(evt);
+            }
+        });
 
         loginButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         loginButton.setText("LOGIN");
@@ -93,6 +98,12 @@ public class OpeningPage extends javax.swing.JFrame {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void createAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountButtonActionPerformed
+        System.out.println("Create account button pressed"); 
+        new AccountCreation().setVisible(true);
+       // TODO add your handling code here:
+    }//GEN-LAST:event_createAccountButtonActionPerformed
 
     /**
      * @param args the command line arguments

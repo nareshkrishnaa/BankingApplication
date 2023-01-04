@@ -61,6 +61,7 @@ public class AccountCreation extends javax.swing.JFrame {
         password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Account Creation Page");
 
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\OneDrive\\Desktop\\JAVA PROJECT\\images\\bank-icon-logo-vector-260nw-399995245.png")); // NOI18N
         jLabel2.setText("jLabel2");
@@ -262,7 +263,7 @@ public class AccountCreation extends javax.swing.JFrame {
     }//GEN-LAST:event_genderNonCisActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        new OpeningPage().setVisible(true);        // TODO add your handling code here:
+        this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void genderFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderFemaleActionPerformed
@@ -301,6 +302,7 @@ public class AccountCreation extends javax.swing.JFrame {
                         String insert = "INSERT INTO customerDetails (name,phoneNumber,gender,emailId,SSN,password) VALUES('" + name1
                                 + "','" + phoneNumber1 + "','" + gender + "','" + mailId1 + "','" + ssn1 + "','" + password1 + "')";
                         stmt.executeUpdate(insert);
+                        JOptionPane.showMessageDialog(null, "Account created successfully");
                     }
                 } catch (ClassNotFoundException | SQLException e) {
                     System.out.println(e);

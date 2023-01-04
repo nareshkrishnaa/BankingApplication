@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -151,6 +152,7 @@ public class Transfer extends javax.swing.JFrame {
             }
             if(benAccFlag==0){
                 System.out.println("ben acc does not exist");
+                JOptionPane.showMessageDialog(null, "benificiary acc does not exist");
                 break send;
             }
             
@@ -161,6 +163,7 @@ public class Transfer extends javax.swing.JFrame {
                 if(rs2.getInt("BankBalance")<amount)
                 {
                     System.out.println("Insufficient balance");
+                    JOptionPane.showMessageDialog(null, "Insufficient balance");
                     break send;
                 }
             }
@@ -177,6 +180,7 @@ public class Transfer extends javax.swing.JFrame {
             }
             else{
                 System.out.println("Password incorrect");
+                JOptionPane.showMessageDialog(null, "Password incorrect");
                 break send;
             }
               //System.out.println();

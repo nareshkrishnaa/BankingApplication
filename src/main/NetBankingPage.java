@@ -47,6 +47,7 @@ public class NetBankingPage extends javax.swing.JFrame {
         transfer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Banking Operations");
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\OneDrive\\Desktop\\JAVA PROJECT\\images\\bank-icon-logo-vector-260nw-399995245.png")); // NOI18N
 
@@ -116,7 +117,7 @@ public class NetBankingPage extends javax.swing.JFrame {
     }//GEN-LAST:event_depositActionPerformed
 
     private void transferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferActionPerformed
-        // TODO add your handling code here:
+         new Transfer(this.getUserName()).setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_transferActionPerformed
 
     private void balanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_balanceActionPerformed
