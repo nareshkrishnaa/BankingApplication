@@ -279,11 +279,11 @@ public class AccountCreation extends javax.swing.JFrame {
         String ssn1 = ssn.getText();
         String password1 = password.getText();
         String confirmPassword1 = confirmPassword.getText();
-        System.out.println("name : " + name.getText());
-        System.out.println("phoneNumber : " + phoneNumber.getText());
-        System.out.println("gender : " + gender);
-        System.out.println("mail id :" + mailId.getText());
-        System.out.println("SSN :" + ssn.getText());
+//        System.out.println("name : " + name.getText());
+//        System.out.println("phoneNumber : " + phoneNumber.getText());
+//        System.out.println("gender : " + gender);
+//        System.out.println("mail id :" + mailId.getText());
+//        System.out.println("SSN :" + ssn.getText());
 
         if ("".equals(name1) || "".equals(phoneNumber1) || "".equals(mailId1) || "".equals(ssn1)) {
 
@@ -303,6 +303,27 @@ public class AccountCreation extends javax.swing.JFrame {
                                 + "','" + phoneNumber1 + "','" + gender + "','" + mailId1 + "','" + ssn1 + "','" + password1 + "')";
                         stmt.executeUpdate(insert);
                         JOptionPane.showMessageDialog(null, "Account created successfully");
+                    
+                        
+                        //table name for the user is name+ssn
+                        //query to get the account number of the user
+                        
+                        Statement getQuery =con.createStatement();
+                        System.out.println("mailId is "+mailId1);
+                        String accNoQuery=String.format("select accNo from customerdetails where emailId='%s'",mailId1);
+                        System.out.println("query: "+accNoQuery);
+                        ResultSet rsAn=getQuery.executeQuery(accNoQuery);
+                        String accNo=new String() ;
+                        if(rsAn.next()){
+                            accNo=rsAn.getString("accNo");
+                        }
+                       
+                        String tableName="acn"+accNo;
+                        System.out.println("table name :"+tableName);
+                        String tbl = String.format("create table %s (sNo int unique auto_increment,transactions int )",tableName);
+                        
+                        Statement s1 = con.createStatement();
+                        s1.executeUpdate(tbl);
                     }
                 } catch (ClassNotFoundException | SQLException e) {
                     System.out.println(e);

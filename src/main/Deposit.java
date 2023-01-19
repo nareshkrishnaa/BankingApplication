@@ -117,8 +117,10 @@ public class Deposit extends javax.swing.JFrame {
                 Statement stmt = con.createStatement();
 
                 ResultSet rs = stmt.executeQuery("select * from customerdetails where emailId=" + "'" + username + "'");
+                String accNo = new String();
 
                 while (rs.next()) {
+                    accNo=rs.getString("accNo");
                     if (rs.getString(4).equals(username)) {
                         //int initialBalance=rs.getInt("BankBalance");
                         //this.updateQuery(finalBalance,username);
@@ -129,6 +131,11 @@ public class Deposit extends javax.swing.JFrame {
                         stmt.executeUpdate(updateQuery);
                         System.out.println("before option pane");
                         JOptionPane.showMessageDialog(null, "The account balance is deposited");
+                        
+                        Statement updateTable =con.createStatement();
+                        String updateTableQuery =String.format("insert into transaction (accNo,transactions,transactionTime)values('%s',+%s,NOW())", accNo,amt);
+                        System.out.println("updateTableQuery : "+updateTableQuery);
+                        updateTable.executeUpdate(updateTableQuery);
 
                         System.out.println("after option pane");
                         break;

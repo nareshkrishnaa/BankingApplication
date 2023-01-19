@@ -1,5 +1,12 @@
 package main;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -20,6 +27,7 @@ public class NetBankingPage extends javax.swing.JFrame {
      */
     public NetBankingPage() {
         initComponents();
+        str="ank@123";
     }
 
     public NetBankingPage(String username) {
@@ -45,6 +53,7 @@ public class NetBankingPage extends javax.swing.JFrame {
         balance = new javax.swing.JButton();
         deposit = new javax.swing.JButton();
         transfer = new javax.swing.JButton();
+        displayDetails = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Banking Operations");
@@ -75,6 +84,14 @@ public class NetBankingPage extends javax.swing.JFrame {
             }
         });
 
+        displayDetails.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        displayDetails.setText("DISPLAY DETAILS");
+        displayDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                displayDetailsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -88,7 +105,8 @@ public class NetBankingPage extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(balance, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deposit, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(transfer, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(transfer, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(displayDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -102,7 +120,9 @@ public class NetBankingPage extends javax.swing.JFrame {
                 .addComponent(deposit)
                 .addGap(28, 28, 28)
                 .addComponent(transfer)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(displayDetails)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -127,6 +147,38 @@ public class NetBankingPage extends javax.swing.JFrame {
 
 // TODO add your handling code here:
     }//GEN-LAST:event_balanceActionPerformed
+
+    private void displayDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayDetailsActionPerformed
+           
+        try {
+             ConnectionHelper ch =new ConnectionHelper();
+            Connection con =ch.getConnection();
+            Statement stmt = con.createStatement();
+            
+            String query =String.format("select * from customerdetails where emailId='%s'",this.getUserName());
+            ResultSet rs=stmt.executeQuery(query);
+            if(rs.next()){
+                
+            }//"name:%s \nAccount number: \nbankBalance: \nssn: \nphone number: \ngender: \nemailId: "
+            String name=rs.getString("name");
+            String phNo=rs.getString("phoneNumber");
+            String gender=rs.getString("gender");
+            String emailId=rs.getString("emailId");
+            String ssn=rs.getString("ssn");
+            String bankBalance=rs.getString("BankBalance");
+            String accNo=rs.getString("accNo");
+            System.out.println("name: "+name);
+            System.out.println("acc No: "+ accNo);
+            
+        new DisplayDetails(this.getUserName()).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(NetBankingPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+
+       // TODO add your handling code here:
+    }//GEN-LAST:event_displayDetailsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,6 +217,7 @@ public class NetBankingPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton balance;
     private javax.swing.JButton deposit;
+    private javax.swing.JButton displayDetails;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton transfer;
     // End of variables declaration//GEN-END:variables

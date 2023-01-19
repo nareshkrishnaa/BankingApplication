@@ -131,6 +131,7 @@ public class Transfer extends javax.swing.JFrame {
 
     private void sendMoneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMoneyActionPerformed
           String sender=this.getUserName();
+          String senAcc =new String();
           System.out.println(String.format("sender username is %s",sender));
           String benAcc=benAccNo.getText();
           int amount= Integer.valueOf(amt.getText());
@@ -143,6 +144,17 @@ public class Transfer extends javax.swing.JFrame {
             Statement pwdCheck =con.createStatement();
             Statement accNoCheck =con.createStatement();
             Statement balanceCheck=con.createStatement();
+            
+            
+            
+            Statement senAccNo = con.createStatement();
+            String senAccNoQuery = String.format("select accNo from customerdetails where emailId='%s'", sender);
+            ResultSet saq = senAccNo.executeQuery(senAccNoQuery);
+            
+            if(saq.next()){
+                 senAcc=saq.getString("accNo");
+            }
+            
             String accNoCheckQuery=String.format("select * from customerdetails where accNo='%s'",benAcc);
             ResultSet rs1 = accNoCheck.executeQuery(accNoCheckQuery);
             int benAccFlag=0;
@@ -174,9 +186,21 @@ public class Transfer extends javax.swing.JFrame {
                  System.out.println(rs.getString("password")+" "+pwd.getText());
             if((rs.getString("password")).equals(pwd.getText())){
                 System.out.println("Password is correct");                
-            String query=String.format("update customerdetails set BankBalance=BankBalance+%s where accNo='%s'",amount,benAcc);
-            System.out.println(query);
-            stmt.executeUpdate(query);
+            String query1=String.format("update customerdetails set BankBalance=BankBalance+%s where accNo='%s'",amount,benAcc);
+            String query2=String.format("update customerdetails set BankBalance=BankBalance-%s where emailId='%s'",amount,sender);
+            String query3=String.format("insert into transaction (accNo,transactions,transactionTime)values('%s',+%s,NOW())", benAcc,amount);
+            String query4=String.format("insert into transaction (accNo,transactions,transactionTime)values('%s',-%s,NOW())", senAcc,amount);
+            
+            System.out.println(query1);
+                System.out.println(query2);
+            stmt.executeUpdate(query1);
+            stmt.executeUpdate(query2);
+            stmt.executeUpdate(query3);
+            stmt.executeUpdate(query4);
+            
+             JOptionPane.showMessageDialog(null, "Money sent successfully");
+             this.dispose();
+            
             }
             else{
                 System.out.println("Password incorrect");

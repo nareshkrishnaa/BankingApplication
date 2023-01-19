@@ -14,9 +14,9 @@ import javax.swing.JFrame;
 public class StartingApplication {
 
     public static void main(String args[]) {
-        OpeningPage a = new OpeningPage();
+       
 
-        a.setVisible(true);
+        new OpeningPage().setVisible(true);
 
     }
 
