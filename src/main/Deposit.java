@@ -24,7 +24,7 @@ public class Deposit extends javax.swing.JFrame {
      */
     public Deposit() {
         initComponents();
-        str = "ank@123";
+        
     }
     private String str;
 

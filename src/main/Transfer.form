@@ -31,12 +31,12 @@
                       <Group type="102" attributes="0">
                           <Component id="jLabel3" min="-2" pref="217" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="amt" max="32767" attributes="0"/>
+                          <Component id="amt" pref="188" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jLabel4" min="-2" pref="217" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="pwd" min="-2" pref="188" max="-2" attributes="0"/>
+                          <Component id="pwd" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel2" min="-2" pref="217" max="-2" attributes="0"/>
@@ -72,9 +72,9 @@
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="pwd" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Component id="pwd" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="81" max="32767" attributes="0"/>
+              <EmptySpace pref="82" max="32767" attributes="0"/>
               <Component id="sendMoney" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Component id="back" min="-2" max="-2" attributes="0"/>
@@ -112,8 +112,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="amt">
     </Component>
-    <Component class="javax.swing.JTextField" name="pwd">
-    </Component>
     <Component class="javax.swing.JButton" name="sendMoney">
       <Properties>
         <Property name="text" type="java.lang.String" value="Send Money"/>
@@ -126,6 +124,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Back"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="pwd">
     </Component>
   </SubComponents>
 </Form>
